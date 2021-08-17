@@ -2,7 +2,7 @@ name: GSI request bot
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
