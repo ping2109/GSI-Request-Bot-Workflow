@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone --recurse-submodules https://github.com/ping2109/GSI-Request-Bot bot
+          git clone --recurse-submodules https://github.com/penk2109/GSI-Request-Bot bot
           cd bot
           dotnet run -c Release
       - name: Re-run Bot3 workflow
