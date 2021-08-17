@@ -16,7 +16,6 @@ jobs:
         
       - name: Test
         run: |
-          dotnet test --no-restore --verbosity normal
           git clone --recurse-submodules https://github.com/ping2109/GSI-Request-Bot bot
           cd bot
           dotnet run -c Release
