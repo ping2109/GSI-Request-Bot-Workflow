@@ -10,8 +10,8 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-     - name: Kiểm Tra Trích Xuất
-         uses: actions/checkout@master
+      - name: Kiểm Tra Trích Xuất
+        uses: actions/checkout@master
 
         
       - name: Test
