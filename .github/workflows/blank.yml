@@ -1,0 +1,38 @@
+name: GSI request bot
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 525600
+    strategy:
+      matrix:
+        dotnet-version: ['3.0', '3.1.x', '5.0.x' ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: |
+          dotnet test --no-restore --verbosity normal
+          git clone --recurse-submodules https://github.com/ping2109/GSI-Request-Bot bot
+          cd bot
+          dotnet run -c Release
+      - name: Re-run Bot3 workflow
+        continue-on-error: true
+        timeout-minutes: 5
+        run: |
+          cd tmp/bot
+          git commit --allow-empty -s -m "[LOOP] Re-run Bot3 workflow"
+          git push -f
