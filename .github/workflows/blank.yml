@@ -12,10 +12,11 @@ jobs:
     steps:
       - name: Kiểm Tra Trích Xuất
         uses: actions/checkout@master
-
         
       - name: Test
         run: |
+          sudo -E apt-get -qq update
+          sudo -E apt-get -qq install git openjdk-8-jdk p7zip
           git clone --recurse-submodules https://github.com/ping2109/GSI-Request-Bot bot
           cd bot
           dotnet run -c Release
