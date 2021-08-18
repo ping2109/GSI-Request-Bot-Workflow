@@ -19,20 +19,18 @@ jobs:
       - name: Run
         timeout-minutes: 2
         continue-on-error: true
+        env:
+          ARA: ${{ secretssecrets.GH_USER }}
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone --recurse-submodules https://github.com/penk2109/gsi_test bot
-          send \"${{ secrets.GHUSER }}\r\"
-          send \"${{ secrets.GHPASS }}\r\"
+          git clone --recurse-submodules https://github.com/$ARA/gsi_test bot
           cd bot
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
         run: |
-          git clone https://github.com/$username/GSI-Request-Bot-Workflow loop
-          send \"$username\r\"
-          send \"${{ secrets.GHPASS }}\r\"
+          git clone https://github.com/ping2109/GSI-Request-Bot-Workflow loop
           cd loop
           echo "1" >> loop.txt
           git add loop.txt
@@ -40,7 +38,7 @@ jobs:
           expect -c "
           spawn git push -f 
           expect \"Username\"
-          send \"$username\r\"
+          send \"${{ secrets.GH_USER }}\r\"
           expect \"Password\"
           send \"${{ secrets.GH_PASS }}\r\"
           expect \"main -> main\"
