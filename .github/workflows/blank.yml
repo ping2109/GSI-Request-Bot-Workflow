@@ -14,16 +14,31 @@ jobs:
         uses: actions/checkout@master
         
       - name: Test
+        timeout-minutes: 340
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
           git clone --recurse-submodules https://github.com/penk2109/gsi_test bot
           cd bot
           dotnet run -c Release
-      - name: Re-run Bot3 workflow
-        continue-on-error: true
-        timeout-minutes: 5
-        run: |
-          cd tmp/bot
-          git commit --allow-empty -s -m "[LOOP] Re-run Bot3 workflow"
-          git push -f
+       - name: Loop workflow
+         continue-on-error: true
+         run: |
+              git clone https://github.com/$username/GSI-Request-Bot-Workflow loop
+              expect \"Username\"
+              send \"${{ secrets.GHUSER }}\r\"
+              expect \"Password\"
+              send \"${{ secrets.GHPASS }}\r\"
+              cd loop
+              echo "1" >> loop.txt
+              git add loop.txt
+              git commit -m "Workflow : Loop"
+              expect -c "
+              spawn git push -f 
+              expect \"Username\"
+              send \"${{ secrets.GHUSER }}\r\"
+              expect \"Password\"
+              send \"${{ secrets.GHPASS }}\r\"
+              expect \"main -> main\"
+              set timeout -10
+              interact"
