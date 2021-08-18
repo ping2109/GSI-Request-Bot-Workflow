@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+ username: ping2109
+
 jobs:
   build:
     runs-on: ubuntu-latest
