@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@master
         
       - name: Run
-        timeout-minutes: 2
+        timeout-minutes: 1
         continue-on-error: true
         env:
             ARA: "${{ secrets.GH_USER }}"
@@ -29,18 +29,12 @@ jobs:
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
+        env:
+            one: "${{ secrets.GH_USER }}"
+            two: "${{ secrets.GH_PASS }}"
         run: |
-          git clone https://github.com/ping2109/GSI-Request-Bot-Workflow ara
-          cd ara
-          echo "1" >> loop.txt
-          git add loop.txt
-          git commit -m "Workflow : Loop"
-          expect -c "
-          spawn git push -f 
-          expect \"Username\"
-          send \"${{ secrets.GH_USER }}\r\"
-          expect \"Password\"
-          send \"${{ secrets.GH_PASS }}\r\"
-          expect \"main -> main\"
-          set timeout -10
-          interact
+          git config --global user.name "$one"
+          git config --global user.password "$two"
+          cd bot
+          git commit --allow-empty -s -m "[LOOP]"
+          git push -f
