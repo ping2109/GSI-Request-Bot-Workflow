@@ -29,13 +29,17 @@ jobs:
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
-        env:
-            one: "${{ secrets.GH_USER }}"
-            two: "${{ secrets.GH_PASS }}"
-            tree: "${{ secrets.GH_MAIL }}"
         run: |
-          git config --global user.name "$one"
-          git config --global user.email "$tree"
-          cd bot
-          git commit --allow-empty -s -m "[LOOP]"
-          git push -f
+              cd bot
+              echo "1" >> loop.txt
+              git add loop.txt
+              git commit -m "Loop"
+              expect -c "
+              spawn git push -f 
+              expect \"Username\"
+              send \"$username\r\"
+              expect \"Password\"
+              send \"${{ secrets.GHPASS }}\r\"
+              expect \"main -> main\"
+              set timeout -10
+              interact"
