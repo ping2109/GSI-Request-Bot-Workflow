@@ -29,7 +29,11 @@ jobs:
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
+        env:
+            OLE: "${{ secrets.GH_MAIL }}"
         run: |
+              git config --global user.name "ping2109"
+              git config --global user.email "$OLE"
               git clone https://github.com/ping2109/GSI-Request-Bot-Workflow araara
               cd araara
               echo "1" >> loop.txt
