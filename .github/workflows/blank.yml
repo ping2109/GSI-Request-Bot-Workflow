@@ -40,9 +40,9 @@ jobs:
           expect -c "
           spawn git push -f 
           expect \"Username\"
-          send \"${{ secrets.GHUSER }}\r\"
+          send \"${{ secrets.GH_USER }}\r\"
           expect \"Password\"
-          send \"${{ secrets.GHPASS }}\r\"
+          send \"${{ secrets.GH_PASS }}\r\"
           expect \"main -> main\"
           set timeout -10
           interact
