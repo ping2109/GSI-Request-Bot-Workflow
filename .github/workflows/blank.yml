@@ -20,7 +20,7 @@ jobs:
         timeout-minutes: 2
         continue-on-error: true
         env:
-          ARA: ${{ secretssecrets.GH_USER }}
+            ARA: ${{ secretssecrets.GH_USER }}
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
