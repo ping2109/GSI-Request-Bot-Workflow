@@ -28,7 +28,7 @@ jobs:
           git config --global credential.helper store
           echo "https://${{ secrets.GH_NAME }}:${{ secrets.GH_TOKEN }}@github.com" > ~/.git-credentials
       - name: Run
-        timeout-minutes: 1
+        timeout-minutes: 350
         continue-on-error: true
         env:
             ARA: "${{ secrets.GH_NAME2 }}"
