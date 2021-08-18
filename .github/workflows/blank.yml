@@ -39,7 +39,7 @@ jobs:
               echo "1" >> loop.txt
               git add loop.txt
               git commit -m "Loop"
-              expect -c "
+              expect -c
               spawn git push -f 
               expect \"Username\"
               send \"${{ secrets.GH_USER2 }}\r\"
