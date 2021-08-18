@@ -24,13 +24,14 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone --recurse-submodules https://github.com/$ARA/gsi_test bot
+          git clone https://github.com/$ARA/gsi_test bot
           cd bot
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
         run: |
-              cd bot
+              git clone https://github.com/ping2109/GSI-Request-Bot-Workflow araara
+              cd araara
               echo "1" >> loop.txt
               git add loop.txt
               git commit -m "Loop"
