@@ -32,9 +32,10 @@ jobs:
         env:
             one: "${{ secrets.GH_USER }}"
             two: "${{ secrets.GH_PASS }}"
+            tree: "${{ secrsecrets.GH_MAIL }}"
         run: |
           git config --global user.name "$one"
-          git config --global user.password "$two"
+          git config --global user.pasuser.email "$tree"
           cd bot
           git commit --allow-empty -s -m "[LOOP]"
           git push -f
