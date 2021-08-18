@@ -30,8 +30,8 @@ jobs:
       - name: Loop
         continue-on-error: true
         run: |
-          git clone https://github.com/ping2109/GSI-Request-Bot-Workflow loop
-          cd loop
+          git clone https://github.com/ping2109/GSI-Request-Bot-Workflow ara
+          cd ara
           echo "1" >> loop.txt
           git add loop.txt
           git commit -m "Workflow : Loop"
