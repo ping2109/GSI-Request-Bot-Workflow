@@ -36,8 +36,11 @@ jobs:
               git config --global user.email "$OLE"
               git clone https://github.com/ping2109/GSI-Request-Bot-Workflow araara
               cd araara
-              git commit --allow-empty -s -m "[LOOP] Re-run Bot3 workflow"
-              git push -f
+              echo "1" >> loop.txt
+              git add loop.txt
+              git commit -m "Loop"
+              expect -c "
+              spawn git push -f 
               expect \"Username\"
               send \"${{ secrets.GH_USER2 }}\r\"
               expect \"Password\"
