@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
- username: ping2109
+ username: penk2109
 
 jobs:
   build:
