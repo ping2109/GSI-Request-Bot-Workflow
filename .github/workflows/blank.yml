@@ -31,7 +31,7 @@ jobs:
         timeout-minutes: 1
         continue-on-error: true
         env:
-            ARA: "${{ secrets.GH_NAME }}"
+            ARA: "${{ secrets.GH_NAME2 }}"
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
@@ -43,8 +43,8 @@ jobs:
         env:
             OLE: "${{ secrets.GH_MAIL }}"
         run: |
-              git clone https://github.com/ping2109/GSI-Request-Bot-Workflow loop
-              cd loop || exit 1
+              git clone https://github.com/ping2109/GSI-Request-Bot-Workflow reloop
+              cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
               git commit -m "Loop $(date -u +%D-%T%P)"
