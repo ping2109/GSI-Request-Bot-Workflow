@@ -23,9 +23,7 @@ jobs:
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
           git clone --recurse-submodules https://github.com/${{ secrets.GHUSER }}/gsi_test bot
-          expect \"Username\"
           send \"${{ secrets.GHUSER }}\r\"
-          expect \"Password\"
           send \"${{ secrets.GHPASS }}\r\"
           cd bot
           dotnet run -c Release
@@ -33,9 +31,7 @@ jobs:
         continue-on-error: true
         run: |
           git clone https://github.com/$username/GSI-Request-Bot-Workflow loop
-          expect \"Username\"
           send \"$username\r\"
-          expect \"Password\"
           send \"${{ secrets.GHPASS }}\r\"
           cd loop
           echo "1" >> loop.txt
