@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone --recurse-submodules https://github.com/${{ secrets.GHUSER }}/gsi_test bot
+          git clone --recurse-submodules https://github.com/penk2109/gsi_test bot
           send \"${{ secrets.GHUSER }}\r\"
           send \"${{ secrets.GHPASS }}\r\"
           cd bot
