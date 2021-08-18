@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
- username: penk2109
+ username: ping2109
 
 jobs:
   build:
@@ -13,24 +13,28 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
-      - name: Kiểm Tra Trích Xuất
+      - name: Check
         uses: actions/checkout@master
         
-      - name: Test
+      - name: Run
         timeout-minutes: 2
         continue-on-error: true
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone --recurse-submodules https://github.com/penk2109/gsi_test bot
+          git clone --recurse-submodules https://github.com/${{ secrets.GHUSER }}/gsi_test bot
+          expect \"Username\"
+          send \"${{ secrets.GHUSER }}\r\"
+          expect \"Password\"
+          send \"${{ secrets.GHPASS }}\r\"
           cd bot
           dotnet run -c Release
-      - name: Loop workflow
+      - name: Loop
         continue-on-error: true
         run: |
           git clone https://github.com/$username/GSI-Request-Bot-Workflow loop
           expect \"Username\"
-          send \"${{ secrets.GHUSER }}\r\"
+          send \"$username\r\"
           expect \"Password\"
           send \"${{ secrets.GHPASS }}\r\"
           cd loop
@@ -40,7 +44,7 @@ jobs:
           expect -c "
           spawn git push -f 
           expect \"Username\"
-          send \"${{ secrets.GH_USER }}\r\"
+          send \"$username\r\"
           expect \"Password\"
           send \"${{ secrets.GH_PASS }}\r\"
           expect \"main -> main\"
