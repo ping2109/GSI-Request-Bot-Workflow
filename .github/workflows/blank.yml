@@ -30,18 +30,14 @@ jobs:
       - name: Run
         timeout-minutes: 350
         continue-on-error: true
-        env:
-            ARA: "${{ secrets.GH_NAME2 }}"
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone https://github.com/$ARA/gsi_test bot
+          git clone https://github.com/ping2109/gsi_test bot
           cd bot
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
-        env:
-            OLE: "${{ secrets.GH_MAIL }}"
         run: |
               git clone https://github.com/ping2109/GSI-Request-Bot-Workflow reloop
               cd reloop || exit 1
