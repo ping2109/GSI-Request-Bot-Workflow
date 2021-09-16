@@ -2,7 +2,7 @@ name: GSI request bot
 
 on:
   push:
-    branches: [testing]
+    branches: [main]
 
 env:
  username: ping2109
@@ -44,4 +44,4 @@ jobs:
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
               git commit -m "Loop $(date -u +%D-%T%P)"
-              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:testing
+              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:main
