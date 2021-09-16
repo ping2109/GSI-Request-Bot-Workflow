@@ -1,8 +1,8 @@
 name: GSI request bot
 
 on:
-  push:
-    branches: [main]
+    push:
+    workflow_dispatch:
 
 env:
  username: ping2109
