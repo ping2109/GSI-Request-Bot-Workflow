@@ -2,7 +2,7 @@ name: GSI request bot
 
 on:
   push:
-    branches: [main]
+    branches: [testing]
 
 env:
  username: ping2109
@@ -33,7 +33,7 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone https://github.com/ping2109/gsi_test bot
+          git clone https://github.com/ping2109/rom-release-bot bot
           cd bot
           dotnet run -c Release
       - name: Loop
@@ -44,4 +44,4 @@ jobs:
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
               git commit -m "Loop $(date -u +%D-%T%P)"
-              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:main
+              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:testing
