@@ -1,8 +1,8 @@
 name: GSI request bot
 
 on:
-    push:
-    workflow_dispatch:
+  push:
+    branches: [main]
 
 env:
  username: ping2109
@@ -33,13 +33,13 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          git clone https://github.com/ping2109/rom-release-bot bot
+          git clone https://github.com/ping2109/gsi_test bot
           cd bot
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
         run: |
-              git clone https://github.com/ping2109/GSI-Request-Bot-Workflow reloop
+              git clone https://github.com/ping2109/ping2109GSIs-Request-Bot reloop
               cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
