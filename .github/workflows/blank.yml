@@ -1,6 +1,7 @@
 name: GSI request bot
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
