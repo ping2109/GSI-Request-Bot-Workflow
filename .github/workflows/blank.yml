@@ -3,7 +3,7 @@ name: GSI request bot
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [gsi]
 
 env:
  username: ping2109
@@ -40,9 +40,9 @@ jobs:
       - name: Loop
         continue-on-error: true
         run: |
-              git clone https://github.com/ping2109/ping2109GSIs-Request-Bot reloop
+              git clone https://github.com/ping2109/ping2109GSIs-Request-Bot -b gsi reloop
               cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
               git add loop.txt
               git commit -m "Loop $(date -u +%D-%T%P)"
-              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:main
+              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/GSI-Request-Bot-Workflow HEAD:gsi
