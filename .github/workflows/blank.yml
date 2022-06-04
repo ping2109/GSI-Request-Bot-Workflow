@@ -34,7 +34,7 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          Install-Package Telegram.Bot -Version 16.0.2
+          dotnet add package Telegram.Bot --version 16.0.2
           git clone https://github.com/ping2109/gsi_test bot
           cd bot
           dotnet run -c Release
