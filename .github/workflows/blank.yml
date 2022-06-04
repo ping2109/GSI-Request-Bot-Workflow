@@ -34,9 +34,9 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install git openjdk-8-jdk p7zip
-          dotnet add package Telegram.Bot --version 16.0.2
           git clone https://github.com/ping2109/gsi_test bot
           cd bot
+          dotnet add package Telegram.Bot --version 16.0.2
           dotnet run -c Release
       - name: Loop
         continue-on-error: true
